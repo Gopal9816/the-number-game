@@ -27,7 +27,7 @@ router.get('/generate', function(req, res, next){
   var randNum = ranNums[0]*1000 + ranNums[1]*100 + ranNums[2]*10 + ranNums[3]
 
   res.json({
-    Number : randNum
+    number : randNum
   })
 })
 
