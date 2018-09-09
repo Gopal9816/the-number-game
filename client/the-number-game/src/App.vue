@@ -1,7 +1,12 @@
 <template>
-  <div id="app" class="container is-fluid">
+  <div id="app" class="container is-fluid has-background-light">
     <navbar></navbar>
     <router-view></router-view>
+    <footer class="footer has-background-white  ">
+      <div class="content has-text-centered">
+          created with <i class="fa fa-heart"></i> Check out the source code on github <i class="fab fa-github"></i>
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -31,5 +36,11 @@ export default {
 </script>
 
 <style>
-
+  #app{
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+  .footer{
+    padding: 1.5rem 1.5rem 1.5rem;
+  }
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar">
+    <nav class="navbar is-fixed-top is-transparent" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
             <a class="navbar-item">The Number Game</a>
 
@@ -12,13 +12,13 @@
         <div :class="{'navbar-menu' : true, 'is-active': isActive}">
             <div class="navbar-end">
                 <a class="navbar-item" href="/">
-                    Home
+                    <i class="fa fa-home"></i> &nbsp;Home
                 </a>
-                <a class="navbar-item" >
-                    How To Play
+                <a class="navbar-item" href="/rules">
+                    <i class="fas fa-question-circle"></i> &nbsp;How To Play
                 </a>
                 <a class="navbar-item" href="/about">
-                    About
+                    <i class="fas fa-info-circle"></i> &nbsp;About
                 </a>
                 <a class="navbar-item" v-show="isSession">
                     {{ username }}
@@ -48,5 +48,12 @@ export default {
 </script>
 
 <style>
+    @media screen and (min-width: 800px) {
+        .navbar{
+        padding-left:20px;
+        padding-right: 20px;
+    }
+    }
 
+    
 </style>

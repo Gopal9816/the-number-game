@@ -3,7 +3,7 @@
         <error v-if="errorFlag">
             {{ error }}
         </error>
-        <section class="hero is-light is-fullheight">
+        <section class="hero is-success is-bold is-fullheight">
             <div class="hero-body has-text-centered">
                 <div class="container">
                      <h1 class="title">
@@ -19,7 +19,7 @@
                     </div>
                     <div class="columns">
                         <div class="column"></div>
-                        <div class="column"><a class="button is-medium is-success is-rounded is-outlined is-hovered" @click="register">Click Here</a></div>
+                        <div class="column"><a class="button is-medium is-success is-inverted is-rounded is-outlined is-hovered" @click="register">Click Here</a></div>
                         <div class="column"></div>
                     </div>
                 </div>

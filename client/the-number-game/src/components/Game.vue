@@ -1,5 +1,5 @@
 <template>
-    <div class="main-content columns is-fullheight">
+    <div class="main-content columns">
         <aside class="menu column is-2 is-hidden-mobile is-fullheight">
             <p class="menu-label">
                 History
@@ -30,11 +30,11 @@
             </ul>
 
         </aside>
-        <div class="container column is-10">
+        <div class="column is-10 ">
             <error v-if="errorFlag">
                     {{ error }}
             </error>
-            <section class="hero is-light is-fullheight">
+            <section class="hero is-success is-bold is-fullheight">
                 <div class="hero-body">
                     <div class="container has-text-centered">
                         <h1 class="title" v-if="b != null">
@@ -51,7 +51,7 @@
                             </div>
                             <div class="columns">
                                 <div class="column"></div>
-                                <div class="column"><a class="button is-large is-success is-rounded is-outlined is-hovered" @click="guessNumber">Click Here</a></div>
+                                <div class="column"><a class="button is-large is-success is-rounded is-inverted is-outlined is-hovered" @click="guessNumber">Click Here</a></div>
                                 <div class="column"></div>
                             </div>                    
                         </h2>
@@ -160,5 +160,18 @@ export default {
 </script>
 
 <style>
-
+    .main-content{
+        margin-top: 52px;
+        padding-left: 15px;
+        padding-right: 15px;
+        margin-bottom: 0px !important;
+    }
+    .is-10{
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+    .notification{
+        margin-top:5px; 
+        margin-bottom: 5px !important;
+    }
 </style>
