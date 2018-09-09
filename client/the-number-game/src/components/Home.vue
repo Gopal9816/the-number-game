@@ -1,6 +1,6 @@
 <template>
     <div>
-        <error v-show="errorFlag">
+        <error v-if="errorFlag">
             {{ error }}
         </error>
         <section class="hero is-light is-fullheight">
@@ -46,11 +46,28 @@ export default {
                 this.errorFlag = false
                 this.error = ''
                 sessionStorage.username = this.username
-                alert('User registered: ' + sessionStorage.username)
-                window.location = "/about"
+                axios.post('http://localhost:3000/generate',{
+                    username : this.username
+                })
+                .then((response) => {
+                    sessionStorage.userID = response.data.userID
+                    sessionStorage.session = true
+                    window.location = "/game"
+                })
+                .catch((err) => {
+                        console.log(err.message);    
+                        this.errorFlag = true;
+                        this.error = err.message
+                })
             }
         }
-    }
+    },
+    beforeCreate() {
+        if(sessionStorage.session == 'true'){
+            console.log('in create')
+            window.location = "/game"
+        }
+    },
 }
 </script>
 

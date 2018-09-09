@@ -20,6 +20,9 @@
                 <a class="navbar-item" href="/about">
                     About
                 </a>
+                <a class="navbar-item" v-show="isSession">
+                    {{ username }}
+                </a>
             </div>
         </div>
     </nav>
@@ -30,9 +33,17 @@ export default {
     name: 'navbar',
     data(){
         return {
-            isActive : false
+            isActive : false,
+            isSession : false,
+            username : ''
         }
-    }
+    },
+    mounted() {
+        if(sessionStorage.session == 'true'){
+            this.isSession = true
+            this.username = sessionStorage.username
+        }
+    },
 }
 </script>
 

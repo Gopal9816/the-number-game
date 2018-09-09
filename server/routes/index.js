@@ -27,14 +27,14 @@ router.post('/generate', function(req, res, next){
       digits++
   }
   var randNum = ranNums[0]*1000 + ranNums[1]*100 + ranNums[2]*10 + ranNums[3]
-  console.log("NUmber is : "+randNum)
+  console.log("Number is : "+randNum)
 
   var username = req.body.username.toString().toLowerCase();
   var timestamp = new Date().getTime()
 
   var userID = username + timestamp.toString();
 
-  client.set(userID, randNum.toString(),redis.print)
+  client.set(userID, randNum.toString(),'EX',2*60*60,redis.print)
 
   res.json({
     'userID' : userID,
@@ -51,6 +51,12 @@ router.post('/validate', function(req, res, next){
       console.log(err.message)
       throw err
     }
+    if(result == null){
+      return res.json({
+        "error" : "Create new user"
+      })
+    }
+
     randNum = parseInt(result, 10)
     console.log("db num "+randNum)
 
