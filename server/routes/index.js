@@ -89,7 +89,7 @@ router.post('/validate', function(req, res, next){
         b++;
       }
     }
-
+    
     console.log(b + "b\n")
     console.log(c + "c\n")
 
