@@ -34,4 +34,10 @@ export default {
     .subtitle{
         padding-top: 20px;
     }
+    @media only screen and (max-width: 600px) {
+        .hero{
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+    } 
 </style>

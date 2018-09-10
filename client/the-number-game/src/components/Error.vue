@@ -1,8 +1,15 @@
 <template>
-    <div class="notification is-danger has-text-centered">
-        <slot>
-            {{ message }}
-        </slot>
+    <div class="modal is-active">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+            <p class="modal-card-title">Error</p>
+            <button class="delete" aria-label="close" @click="$emit('closeError')"></button>
+            </header>
+            <section class="modal-card-body">
+            <slot>{{ message }}</slot>
+            </section>
+        </div>
     </div>
 </template>
 
@@ -11,7 +18,7 @@ export default {
     name:"error",
     data(){
         return {
-            message : "An error has oocured"
+            message : "An error has occured"
         }
     }
 }

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <error v-if="errorFlag">
+        <error v-if="errorFlag" @closeError="closeErrorModal">
             {{ error }}
         </error>
         <section class="hero is-success is-bold is-fullheight">
@@ -22,6 +22,9 @@
                         <div class="column"><a class="button is-medium is-success is-inverted is-rounded is-outlined is-hovered" @click="register">Click Here</a></div>
                         <div class="column"></div>
                     </div>
+                    <h2 class="subtitle">
+                        Don't know the game? <br/> Click <a href="/rules">here</a>
+                    </h2>
                 </div>
             </div>
         </section>
@@ -52,7 +55,7 @@ export default {
                 this.errorFlag = false
                 this.error = ''
                 sessionStorage.username = this.username
-                axios.post('http://localhost:3000/generate',{
+                axios.post('https://the-number-game-api.herokuapp.com/generate',{
                     username : this.username
                 })
                 .then((response) => {
@@ -66,6 +69,10 @@ export default {
                         this.error = err.message
                 })
             }
+        },
+        closeErrorModal(){
+            this.errorFlag = false
+            this.error = null
         }
     },
     beforeCreate() {

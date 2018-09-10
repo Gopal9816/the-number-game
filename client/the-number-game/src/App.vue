@@ -4,7 +4,9 @@
     <router-view></router-view>
     <footer class="footer has-background-white  ">
       <div class="content has-text-centered">
-          created with <i class="fa fa-heart"></i> Check out the source code on github <i class="fab fa-github"></i>
+          <p>
+            Created with <i class="fa fa-heart"></i> Check out the code at <a href="#"> GitHub <i class="fab fa-github"></i></a>
+          </p>
       </div>
     </footer>
   </div>
@@ -15,6 +17,7 @@
 
 import Navbar from './components/Navbar.vue';
 import Home from './components/Home.vue';
+
 
 export default {
   name: 'app',

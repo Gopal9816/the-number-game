@@ -23,7 +23,5 @@ export default {
 </script>
 
 <style>
-    .hero{
-        margin-top: 52px;
-    }
+    
 </style>

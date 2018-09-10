@@ -1,5 +1,5 @@
 <template>
-    <div class="main-content columns">
+    <div class="main-content columns is-desktop">
         <aside class="menu column is-2 is-hidden-mobile is-fullheight">
             <p class="menu-label">
                 History
@@ -30,8 +30,20 @@
             </ul>
 
         </aside>
+        <div class="column is-hidden-desktop" v-if="history.length != 0">
+            <h3 class="content">History</h3>
+            <div class="scrolling-wrapper">
+                <div class="my-card has-text-centered" v-for="item in history">
+                    <div class="box">
+                        <h2><strong>{{ item.num }}</strong></h2>
+                        <h4>{{ item.b + " B" }}</h4>
+                        <h4>{{ item.c + " C" }}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="column is-10 ">
-            <error v-if="errorFlag">
+            <error v-if="errorFlag" @closeError="closeErrorModal">
                     {{ error }}
             </error>
             <section class="hero is-success is-bold is-fullheight">
@@ -46,14 +58,19 @@
                         <h2 class="subtitle">
                             <div class="columns">
                                 <div class="column"></div>
-                                <div class="column"><input v-model="guess" class="input is-large is-rounded is-hover" type="text" placeholder="Enter Number Here"></div>
+                                <div class="column"><input v-model="guess" class="input is-medium is-rounded is-hover" type="text" placeholder="Enter Number Here"></div>
                                 <div class="column"></div>
                             </div>
                             <div class="columns">
                                 <div class="column"></div>
-                                <div class="column"><a class="button is-large is-success is-rounded is-inverted is-outlined is-hovered" @click="guessNumber">Click Here</a></div>
+                                <div class="column"><a class="button is-medium is-success is-rounded is-inverted is-outlined is-hovered" @click="guessNumber">Guess</a></div>
                                 <div class="column"></div>
-                            </div>                    
+                            </div>  
+                            <div class="columns">
+                                <div class="column"></div>
+                                <div class="column"><a class="button is-medium is-danger is-rounded is-hovered" @click="giveUp">Give Up</a></div>
+                                <div class="column"></div>
+                            </div>                     
                         </h2>
 
                     </div>
@@ -104,12 +121,17 @@ export default {
             }
             else if((/([0-9]).*?\1/).test(this.guess)){
                 this.errorFlag = true
-                    this.error = 'Number cannot contain repeating digits'
-                    return
+                this.error = 'Number cannot contain repeating digits'
+                return
             }
             var num = parseInt(this.guess,10)
+            if(isNaN(num)){
+                this.errorFlag = true
+                this.error = 'All you had to do was enter a number'
+                return
+            }
             var userID = sessionStorage.userID
-            axios.post('http://localhost:3000/validate',{
+            axios.post('https://the-number-game-api.herokuapp.com/validate',{
                 userID : userID,
                 guessNum : num
             })
@@ -149,6 +171,26 @@ export default {
             sessionStorage.username = null
             this.showResult = false
             window.location = '/'
+        },
+        closeErrorModal(){
+            this.errorFlag = false
+            this.error = null
+        },
+        giveUp(){
+            console.log('In give up')
+            var userID = sessionStorage.userID
+            axios.post('https://the-number-game-api.herokuapp.com/getnum',{
+                userID : userID
+            })
+            .then((response) => {
+                this.showResult = true
+                this.resultTitle = "Better luck next time"
+                this.resultMsg = "Your number was "+response.data.number
+            })
+            .catch((err)=>{
+                console.log("Error caught :"+err.message+'\n')
+                console.log(err);
+            })
         }
     },
     beforeCreate() {
@@ -161,9 +203,9 @@ export default {
 
 <style>
     .main-content{
-        margin-top: 52px;
-        padding-left: 15px;
-        padding-right: 15px;
+        padding-top: 10px;
+        padding-left: 10px;
+        padding-right: 0px;
         margin-bottom: 0px !important;
     }
     .is-10{
@@ -174,4 +216,29 @@ export default {
         margin-top:5px; 
         margin-bottom: 5px !important;
     }
+    .scrolling-wrapper {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+    }
+    .my-card {
+            flex: 0 0 auto;
+            padding-left:15px !important;
+            padding-right:15px !important;
+        }
+
+    @media only screen and (max-width: 600px) {
+        .main-content{
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+        .is-10{
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+        .hero{
+            padding-left:10px;
+            padding-right: 10px;
+        }
+    } 
 </style>
