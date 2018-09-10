@@ -1,6 +1,6 @@
 <template>
     <div class="main-content columns is-desktop">
-        <aside class="menu column is-2 is-hidden-mobile is-fullheight">
+        <aside class="menu column is-2 is-hidden-touch is-fullheight">
             <p class="menu-label">
                 History
             </p>
